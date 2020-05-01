@@ -23,7 +23,7 @@ const QuestionSchema = new mongoose.Schema(
       required: true,
     },
     theme: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId, // RELACAO
       ref: 'Theme',
       required: true,
     },

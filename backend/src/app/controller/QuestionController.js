@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Question from '../schemas/Question';
+import Theme from '../schemas/Theme';
 
 class QuestionController {
   async store(req, res) {
@@ -25,6 +26,12 @@ class QuestionController {
       res.status(400).json({ error: 'Campos inválidos' });
     }
 
+    const searchTheme = await Theme.findById(theme);
+
+    if (!searchTheme) {
+      res.status(404).json({ error: 'Tema inexistente' });
+    }
+
     const createAsk = await Question.create({
       ask,
       answer_1,
@@ -40,7 +47,7 @@ class QuestionController {
   async show(req, res) {
     const { id } = req.params;
 
-    const questions = await Question.findById(id).populate('theme', ['name']);
+    const questions = await Question.findById(id).populate('theme', ['name']); // innerjoin (o populate consegue relacionar 2 tabelas, no caso ID do tema e nome)
 
     if (!questions) {
       return res.status(404).json({ error: 'A questão não existe' });
@@ -89,6 +96,12 @@ class QuestionController {
 
     if (!(await schema.isValid(req.body))) {
       res.status(400).json({ error: 'Campos inválidos' });
+    }
+
+    const searchTheme = await Theme.findById(theme);
+
+    if (!searchTheme) {
+      res.status(404).json({ error: 'Tema inexistente' });
     }
 
     const updateQuestion = await Question.findByIdAndUpdate(id, {
