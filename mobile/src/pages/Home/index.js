@@ -17,8 +17,8 @@ const style = StyleSheet.create({
     width: '100%',
   },
   logoImage: {
-    width: 325,
-    marginBottom: 25,
+    width: 275,
+    marginBottom: 90,
   },
 });
 
@@ -42,7 +42,7 @@ const Home = () => {
 
     Animated.spring(containerButtonY, {
       toValue: 0,
-      tension: 4,
+      tension: 3,
       delay: 1200,
     }).start();
 
