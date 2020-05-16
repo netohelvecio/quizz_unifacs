@@ -13,6 +13,7 @@ class Database {
         useCreateIndex: true,
         useFindAndModify: false,
       });
+      console.log('Conectado');
     } catch (error) {
       console.log('Falha na conexão');
     }
