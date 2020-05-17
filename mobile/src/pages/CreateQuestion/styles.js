@@ -32,5 +32,5 @@ export const ButtonSubmitText = styled.Text`
 
 export const TextError = styled.Text`
   font-size: 10px;
-  color: #CB394B;
+  color: #cb394b;
 `;

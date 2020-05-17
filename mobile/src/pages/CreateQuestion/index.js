@@ -40,18 +40,37 @@ const CreateQuestion = () => {
 
       <Controller
         as={
-          <TextInput placeholder="Digite qual será a pergunta!" multiline numberOfLines={3} textAlignVertical="top" placeholderTextColor="#666" style={[styles.inputStyle, {borderColor: errors.answer_1 ? '#CB394B' : '#999'}]}/>
+          <TextInput
+            placeholder="Digite qual será a pergunta!"
+            multiline
+            numberOfLines={3}
+            textAlignVertical="top"
+            placeholderTextColor="#666"
+            style={[
+              styles.inputStyle,
+              { borderColor: errors.answer_1 ? '#CB394B' : '#999' },
+            ]}
+          />
         }
         control={control}
         name="ask"
-        onChange={args => args[0].nativeEvent.text}
+        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
       />
       {errors.ask && <TextError>Campo obrigatório</TextError>}
 
       <Controller
-        as={<TextInput placeholder="Resposta da primeira alternativa!" placeholderTextColor="#666" style={[styles.inputStyle, {borderColor: errors.answer_1 ? '#CB394B' : '#999'}]} />}
+        as={
+          <TextInput
+            placeholder="Resposta da primeira alternativa!"
+            placeholderTextColor="#666"
+            style={[
+              styles.inputStyle,
+              { borderColor: errors.answer_1 ? '#CB394B' : '#999' },
+            ]}
+          />
+        }
         control={control}
         name="answer_1"
         onChange={(args) => args[0].nativeEvent.text}
@@ -62,33 +81,57 @@ const CreateQuestion = () => {
 
       <Controller
         as={
-          <TextInput placeholder="Resposta da segunda alternativa!" placeholderTextColor="#666" style={[styles.inputStyle, {borderColor: errors.answer_1 ? '#CB394B' : '#999'}]} />
+          <TextInput
+            placeholder="Resposta da segunda alternativa!"
+            placeholderTextColor="#666"
+            style={[
+              styles.inputStyle,
+              { borderColor: errors.answer_1 ? '#CB394B' : '#999' },
+            ]}
+          />
         }
         control={control}
         name="answer_2"
-        onChange={args => args[0].nativeEvent.text}
+        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
       />
+
       {errors.answer_2 && <TextError>Campo obrigatório</TextError>}
 
       <Controller
         as={
-          <TextInput placeholder="Resposta da terceira alternativa!" placeholderTextColor="#666" style={[styles.inputStyle, {borderColor: errors.answer_1 ? '#CB394B' : '#999'}]} />
+          <TextInput
+            placeholder="Resposta da terceira alternativa!"
+            placeholderTextColor="#666"
+            style={[
+              styles.inputStyle,
+              { borderColor: errors.answer_1 ? '#CB394B' : '#999' },
+            ]}
+          />
         }
         control={control}
         name="answer_3"
-        onChange={args => args[0].nativeEvent.text}
+        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
       />
       {errors.answer_3 && <TextError>Campo obrigatório</TextError>}
 
       <Controller
-        as={<TextInput placeholder="Resposta CORRETA!" placeholderTextColor="#666" style={[styles.inputStyle, {borderColor: errors.answer_1 ? '#CB394B' : '#999'}]} />}
+        as={
+          <TextInput
+            placeholder="Resposta CORRETA!"
+            placeholderTextColor="#666"
+            style={[
+              styles.inputStyle,
+              { borderColor: errors.answer_1 ? '#CB394B' : '#999' },
+            ]}
+          />
+        }
         control={control}
         name="answer_correct"
-        onChange={args => args[0].nativeEvent.text}
+        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
       />
