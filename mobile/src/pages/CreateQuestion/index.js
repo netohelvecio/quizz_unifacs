@@ -1,7 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
-import { TextInput, StyleSheet, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  TextInput,
+  StyleSheet,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 
 import Loading from '../../components/Loading';
 
@@ -39,7 +45,13 @@ const CreateQuestion = () => {
   const { theme } = route.params;
   const { control, handleSubmit, errors } = useForm();
 
-  async function handleForm({ ask, answer_1,  answer_2, answer_3, answer_correct}) {
+  async function handleForm({
+    ask,
+    answer_1,
+    answer_2,
+    answer_3,
+    answer_correct,
+  }) {
     try {
       setLoading(true);
 
@@ -179,7 +191,11 @@ const CreateQuestion = () => {
       {errors.answer_correct && <TextError>Campo obrigatório</TextError>}
 
       <ButtonSubmit onPress={handleSubmit(handleForm)}>
-        {loading ? <Loading color="#fff" size={26} /> : <ButtonSubmitText>Criar pergunta</ButtonSubmitText>}
+        {loading ? (
+          <Loading color="#fff" size={26} />
+        ) : (
+          <ButtonSubmitText>Criar pergunta</ButtonSubmitText>
+        )}
       </ButtonSubmit>
     </Container>
   );
