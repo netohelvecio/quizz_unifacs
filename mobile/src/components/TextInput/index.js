@@ -1,13 +1,14 @@
 import React from 'react';
+import { TextInput } from 'react-native';
 
 import { TextInputStyle, TextAreaInputStyle } from './styles';
 
-const TextInputComponent = ({ placeholder }) => {
+const TextInputComponent = () => {
   return (
-    <TextInputStyle
-      placeholder={placeholder}
-      placeholderTextColor="#333"
-      returnKeyType="next"
+    <TextInput
+    // placeholder={placeholder}
+    // placeholderTextColor="#333"
+    // returnKeyType="next"
     />
   );
 };
@@ -17,7 +18,7 @@ const TextAreaInputComponent = ({ placeholder }) => {
     <TextAreaInputStyle
       placeholder={placeholder}
       multiline
-      numberOfLines={4}
+      numberOfLines={2}
       placeholderTextColor="#333"
       textAlignVertical="top"
     />
