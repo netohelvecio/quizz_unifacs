@@ -11,8 +11,6 @@ import {
 } from './styles';
 
 const SelectCorrectAnswer = ({ answer, check, setCheck, numberAnswer }) => {
-  // const [checkSelect, isCheckSelect] = useState(false);
-
   function handlePress() {
     if (numberAnswer === 1) {
       setCheck.setCheck1(true);
