@@ -24,5 +24,6 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
+    'camelcase': 'off',
   },
 };

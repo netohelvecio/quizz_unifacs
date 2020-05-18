@@ -26,6 +26,7 @@
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
     "react-native-web": "~0.11.7",
+    "rn-sliding-button": "^1.1.5",
     "styled-components": "^5.1.0",
     "yarn": "^1.22.4"
   },

@@ -57,6 +57,10 @@ const Home = () => {
     navigation.navigate('Question');
   }
 
+  function goToPlayQuiz() {
+    navigation.navigate('PlayQuiz');
+  }
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -68,7 +72,7 @@ const Home = () => {
       />
 
       <Animated.View style={[style.container, { top: containerButtonY }]}>
-        <ButtonPlay onPress={() => {}}>
+        <ButtonPlay onPress={goToPlayQuiz}>
           <ButtonPlayText>Jogar</ButtonPlayText>
         </ButtonPlay>
       </Animated.View>
