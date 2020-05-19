@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
@@ -12,8 +12,6 @@ import {
   ButtonSliderContainer,
   ButtonSliderIconBorder,
 } from './styles';
-
-// import imgBackground from '../../assets/bg-image.jpg';
 
 const styles = StyleSheet.create({
   slideButton: {
@@ -32,7 +30,7 @@ const TutorialQuiz = () => {
   const navigation = useNavigation();
 
   function goToPlayQuiz() {
-    navigation.navigate('QuestionPlay');
+    navigation.navigate('ChooseThemePlay');
   }
 
   return (

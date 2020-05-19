@@ -2,7 +2,18 @@ import React from 'react';
 import { StatusBar, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, ContainerScore, TextCongratulations, TextCongratulationsSubTitle, TextScore, TextAnswerTotal, ButtonShare, ButtonShareText, ButtonBack, ButtonBackText } from './styles';
+import {
+  Container,
+  ContainerScore,
+  TextCongratulations,
+  TextCongratulationsSubTitle,
+  TextScore,
+  TextAnswerTotal,
+  ButtonShare,
+  ButtonShareText,
+  ButtonBack,
+  ButtonBackText,
+} from './styles';
 
 // import imgBackground from '../../assets/bg-quiz.png';
 import logo from '../../assets/logo-white.png';
