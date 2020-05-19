@@ -45,7 +45,7 @@ class CorrectAnswerController {
 
     const questionShuffled = shuffleArray(questionFiltered);
 
-    const questionFirstFive = questionShuffled.slice(0, 4);
+    const questionFirstFive = questionShuffled.slice(0, 5);
 
     return res.json(questionFirstFive);
   }
