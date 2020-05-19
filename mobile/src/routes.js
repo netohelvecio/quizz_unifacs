@@ -9,6 +9,7 @@ import ChooseTheme from './pages/ChooseTheme';
 
 import TutorialQuiz from './pages/TutorialQuiz';
 import QuestionPlay from './pages/QuestionPlay';
+import EndQuiz from './pages/EndQuiz';
 
 const AppStack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const Question = () => {
 const PlayQuiz = () => {
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
+      <AppStack.Screen name="EndQuiz" component={EndQuiz} />
       <AppStack.Screen name="TutorialQuiz" component={TutorialQuiz} />
       <AppStack.Screen name="QuestionPlay" component={QuestionPlay} />
     </AppStack.Navigator>

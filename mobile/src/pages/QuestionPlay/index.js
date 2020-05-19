@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, StatusBar, StyleSheet } from 'react-native';
-import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
+import { StatusBar } from 'react-native';
 
 import SelectCorrectAnswer from '../../components/SelectCorrectAnswer';
 
@@ -14,8 +13,6 @@ import {
   ButtonSubmitText,
 } from './styles';
 
-import imgBackground from '../../assets/bg-image.jpg';
-
 const QuestionPlay = () => {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
@@ -25,10 +22,6 @@ const QuestionPlay = () => {
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#3c234a" />
-      {/* <ImageBackground
-        source={imgBackground}
-        style={{ flex: 1, resizeMode: 'center', alignItems: 'center', padding: 20 }}
-      > */}
 
       <TimeText>60 seg</TimeText>
 
@@ -93,7 +86,6 @@ const QuestionPlay = () => {
         <ButtonSubmitText>Próxima</ButtonSubmitText>
       </ButtonSubmit>
 
-      {/* </ImageBackground> */}
     </Container>
   );
 };
