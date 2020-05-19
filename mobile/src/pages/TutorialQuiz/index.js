@@ -13,7 +13,7 @@ import {
   ButtonSliderIconBorder,
 } from './styles';
 
-import imgBackground from '../../assets/bg-image.jpg';
+// import imgBackground from '../../assets/bg-image.jpg';
 
 const styles = StyleSheet.create({
   slideButton: {
