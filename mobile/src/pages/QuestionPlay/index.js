@@ -117,6 +117,12 @@ const QuestionPlayComponent = ({ questionStore }) => {
         answer_user: userResponse,
       });
 
+      setUserResponse('');
+      setCheck1(false);
+      setCheck2(false);
+      setCheck3(false);
+      setCheck4(false);
+
       if (response.data.mensagem) {
         questionStore.setQuestionCount();
       }
@@ -127,16 +133,24 @@ const QuestionPlayComponent = ({ questionStore }) => {
   }
 
   async function nextQuestion() {
-    await checkCorrectQuestion();
-    setCountQuestions(countQuestions + 1);
+    if (!userResponse) {
+      Alert.alert('Escolha um das alternativas!');
+    } else {
+      await checkCorrectQuestion();
+      setCountQuestions(countQuestions + 1);
+    }
   }
 
   async function goToEndQuiz() {
-    await checkCorrectQuestion();
-    navigation.navigate('EndQuiz', {
-      count: questionStore.questionCorrectCount,
-      theme: questions[countQuestions].theme.name,
-    });
+    if (!userResponse) {
+      Alert.alert('Escolha um das alternativas!');
+    } else {
+      await checkCorrectQuestion();
+      navigation.navigate('EndQuiz', {
+        count: questionStore.questionCorrectCount,
+        theme: questions[countQuestions].theme.name,
+      });
+    }
   }
 
   return (
