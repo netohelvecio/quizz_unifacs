@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, Image } from 'react-native';
+import { StatusBar, Image, Linking } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import {
@@ -15,17 +15,22 @@ import {
   ButtonBackText,
 } from './styles';
 
-// import imgBackground from '../../assets/bg-quiz.png';
 import logo from '../../assets/logo-white.png';
 
 const TutorialQuiz = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { count } = route.params;
+  const { count, theme } = route.params;
+
+  const text = `Acertei ${count} questões do tema ${theme} no app QuizIdea!!!`;
 
   function goToHome() {
     navigation.navigate('Home');
+  }
+
+  function sendWhatsapp() {
+    Linking.openURL(`whatsapp://send?text=${text}`);
   }
 
   return (
@@ -43,7 +48,7 @@ const TutorialQuiz = () => {
         </TextScore>
       </ContainerScore>
 
-      <ButtonShare onPress={() => {}}>
+      <ButtonShare onPress={sendWhatsapp}>
         <ButtonShareText>Compartilhar pontuação</ButtonShareText>
       </ButtonShare>
 

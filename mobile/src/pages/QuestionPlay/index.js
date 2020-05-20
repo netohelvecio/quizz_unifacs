@@ -135,6 +135,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
     await checkCorrectQuestion();
     navigation.navigate('EndQuiz', {
       count: questionStore.questionCorrectCount,
+      theme: questions[countQuestions].theme.name,
     });
   }
 
