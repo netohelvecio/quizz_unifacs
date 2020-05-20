@@ -1,13 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
-import {
-  TextInput,
-  StyleSheet,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import { TextInput, StyleSheet, Alert } from 'react-native';
 
 import Loading from '../../components/Loading';
 
@@ -33,6 +27,14 @@ const styles = StyleSheet.create({
   },
 });
 
+const defaultValues = {
+  ask: '',
+  answer_1: '',
+  answer_2: '',
+  answer_3: '',
+  answer_correct: '',
+};
+
 const CreateQuestion = () => {
   const [loading, setLoading] = useState(false);
   const route = useRoute();
@@ -43,7 +45,7 @@ const CreateQuestion = () => {
   const answerCorrect = useRef();
 
   const { theme } = route.params;
-  const { control, handleSubmit, errors } = useForm();
+  const { control, handleSubmit, errors, reset } = useForm();
 
   async function handleForm({
     ask,
@@ -63,6 +65,8 @@ const CreateQuestion = () => {
         answer_correct,
         theme,
       });
+
+      reset(defaultValues);
 
       setLoading(false);
       Alert.alert('Pergunta cadastrada com sucesso!');

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, Alert } from 'react-native';
+import { StatusBar, Alert, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import api from '../../services/api';
+import { rondomizerComponents } from '../../utils/rondomizerComponents';
 
 import Loading from '../../components/Loading';
 
@@ -31,6 +32,53 @@ const QuestionPlay = () => {
   const route = useRoute();
   const { theme } = route.params;
 
+  const arrayComponents = [
+    <SelectCorrectAnswer
+      answer={questions[0].answer_1 || ''}
+      numberAnswer={1}
+      check={check1}
+      setCheck={{
+        setCheck1,
+        setCheck2,
+        setCheck3,
+        setCheck4,
+      }}
+    />,
+    <SelectCorrectAnswer
+      answer={questions[0].answer_2 || ''}
+      numberAnswer={2}
+      check={check2}
+      setCheck={{
+        setCheck1,
+        setCheck2,
+        setCheck3,
+        setCheck4,
+      }}
+    />,
+    <SelectCorrectAnswer
+      answer={questions[0].answer_3 || ''}
+      numberAnswer={3}
+      check={check3}
+      setCheck={{
+        setCheck1,
+        setCheck2,
+        setCheck3,
+        setCheck4,
+      }}
+    />,
+    <SelectCorrectAnswer
+      answer={questions[0].answer_correct || ''}
+      numberAnswer={4}
+      check={check4}
+      setCheck={{
+        setCheck1,
+        setCheck2,
+        setCheck3,
+        setCheck4,
+      }}
+    />,
+  ];
+
   useEffect(() => {
     async function loadQuestions() {
       try {
@@ -42,8 +90,6 @@ const QuestionPlay = () => {
           },
         });
 
-        console.log(response.data);
-
         setQuestions(response.data);
         setLoading(false);
       } catch (err) {
@@ -54,6 +100,8 @@ const QuestionPlay = () => {
 
     loadQuestions();
   }, []);
+
+  const randomComponents = rondomizerComponents(arrayComponents);
 
   return (
     <Container>
@@ -68,50 +116,10 @@ const QuestionPlay = () => {
             Questão 1<QuestionTotalNumber>/5</QuestionTotalNumber>
           </QuestionCurrentNumber>
           <AskText>{questions[0].ask || ''}</AskText>
-          <SelectCorrectAnswer
-            answer={questions[0].answer_1 || ''}
-            numberAnswer={1}
-            check={check1}
-            setCheck={{
-              setCheck1,
-              setCheck2,
-              setCheck3,
-              setCheck4,
-            }}
-          />
-          <SelectCorrectAnswer
-            answer={questions[0].answer_2 || ''}
-            numberAnswer={2}
-            check={check2}
-            setCheck={{
-              setCheck1,
-              setCheck2,
-              setCheck3,
-              setCheck4,
-            }}
-          />
-          <SelectCorrectAnswer
-            answer={questions[0].answer_3 || ''}
-            numberAnswer={3}
-            check={check3}
-            setCheck={{
-              setCheck1,
-              setCheck2,
-              setCheck3,
-              setCheck4,
-            }}
-          />
-          <SelectCorrectAnswer
-            answer={questions[0].answer_correct || ''}
-            numberAnswer={4}
-            check={check4}
-            setCheck={{
-              setCheck1,
-              setCheck2,
-              setCheck3,
-              setCheck4,
-            }}
-          />
+
+          {randomComponents.map((component) => {
+            return <View key={component}>{component}</View>;
+          })}
 
           <ButtonSubmit onPress={() => {}}>
             <ButtonSubmitText>Próxima</ButtonSubmitText>
