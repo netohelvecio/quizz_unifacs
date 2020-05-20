@@ -3,6 +3,7 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import { inject, observer } from 'mobx-react';
 
 import {
   Container,
@@ -26,10 +27,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const TutorialQuiz = () => {
+const TutorialQuizComponent = ({ questionStore }) => {
   const navigation = useNavigation();
 
   function goToPlayQuiz() {
+    questionStore.questionCorrectCount = 0;
     navigation.navigate('ChooseThemePlay');
   }
 
@@ -37,10 +39,6 @@ const TutorialQuiz = () => {
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#3c234a" />
 
-      {/* <ImageBackground
-        source={imgBackground}
-        style={{ flex: 1, resizeMode: 'center', alignItems: 'center', padding: 20 }}
-      > */}
       <TextTutorialTitle>Tutorial</TextTutorialTitle>
       <TextTutorial>
         Serão 5 questões sobre o tema escolhido, você tem 1 minuto para
@@ -61,9 +59,10 @@ const TutorialQuiz = () => {
           <SliderButtonText>DESLIZE</SliderButtonText>
         </ButtonSliderContainer>
       </RNSlidingButton>
-      {/* </ImageBackground> */}
     </Container>
   );
 };
 
-export default TutorialQuiz;
+export const TutorialQuiz = inject('questionStore')(
+  observer(TutorialQuizComponent)
+);

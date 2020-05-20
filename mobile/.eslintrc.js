@@ -26,5 +26,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'camelcase': 'off',
     'no-param-reassign': 'off',
+    'react/prop-types': 'off',
   },
 };

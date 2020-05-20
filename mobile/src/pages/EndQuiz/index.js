@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import {
   Container,
@@ -20,6 +20,9 @@ import logo from '../../assets/logo-white.png';
 
 const TutorialQuiz = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { count } = route.params;
 
   function goToHome() {
     navigation.navigate('Home');
@@ -32,10 +35,11 @@ const TutorialQuiz = () => {
 
       <ContainerScore>
         <TextCongratulations>Parabéns</TextCongratulations>
-        <TextCongratulationsSubTitle>Você acertou</TextCongratulationsSubTitle>
+        <TextCongratulationsSubTitle>Você acertou:</TextCongratulationsSubTitle>
 
         <TextScore>
-          5<TextAnswerTotal>/5</TextAnswerTotal>
+          {count}
+          <TextAnswerTotal>/5</TextAnswerTotal>
         </TextScore>
       </ContainerScore>
 

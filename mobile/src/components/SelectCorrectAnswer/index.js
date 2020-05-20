@@ -9,28 +9,38 @@ import {
   ButtonSelect,
 } from './styles';
 
-const SelectCorrectAnswer = ({ answer, check, setCheck, numberAnswer }) => {
+const SelectCorrectAnswer = ({
+  answer,
+  check,
+  setCheck,
+  numberAnswer,
+  setUserResponse,
+}) => {
   function handlePress() {
     if (numberAnswer === 1) {
       setCheck.setCheck1(true);
       setCheck.setCheck2(false);
       setCheck.setCheck3(false);
       setCheck.setCheck4(false);
+      setUserResponse(answer);
     } else if (numberAnswer === 2) {
       setCheck.setCheck1(false);
       setCheck.setCheck2(true);
       setCheck.setCheck3(false);
       setCheck.setCheck4(false);
+      setUserResponse(answer);
     } else if (numberAnswer === 3) {
       setCheck.setCheck1(false);
       setCheck.setCheck2(false);
       setCheck.setCheck3(true);
       setCheck.setCheck4(false);
+      setUserResponse(answer);
     } else {
       setCheck.setCheck1(false);
       setCheck.setCheck2(false);
       setCheck.setCheck3(false);
       setCheck.setCheck4(true);
+      setUserResponse(answer);
     }
   }
 

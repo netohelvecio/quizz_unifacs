@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, Alert, View } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { StatusBar, Alert, View, Text } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { inject, observer } from 'mobx-react';
 
 import api from '../../services/api';
 import { rondomizerComponents } from '../../utils/rondomizerComponents';
 
 import Loading from '../../components/Loading';
-
 import SelectCorrectAnswer from '../../components/SelectCorrectAnswer';
 
 import {
@@ -19,7 +19,7 @@ import {
   ButtonSubmitText,
 } from './styles';
 
-const QuestionPlay = () => {
+const QuestionPlayComponent = ({ questionStore }) => {
   const [questions, setQuestions] = useState([
     { ask: '', answer_1: '', answer_2: '', answer_3: '', answer_correct: '' },
   ]);
@@ -28,15 +28,19 @@ const QuestionPlay = () => {
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
   const [check4, setCheck4] = useState(false);
+  const [countQuestions, setCountQuestions] = useState(0);
+  const [userResponse, setUserResponse] = useState('');
 
+  const navigation = useNavigation();
   const route = useRoute();
   const { theme } = route.params;
 
   const arrayComponents = [
     <SelectCorrectAnswer
-      answer={questions[0].answer_1 || ''}
+      answer={questions[countQuestions].answer_1 || ''}
       numberAnswer={1}
       check={check1}
+      setUserResponse={setUserResponse}
       setCheck={{
         setCheck1,
         setCheck2,
@@ -45,9 +49,10 @@ const QuestionPlay = () => {
       }}
     />,
     <SelectCorrectAnswer
-      answer={questions[0].answer_2 || ''}
+      answer={questions[countQuestions].answer_2 || ''}
       numberAnswer={2}
       check={check2}
+      setUserResponse={setUserResponse}
       setCheck={{
         setCheck1,
         setCheck2,
@@ -56,9 +61,10 @@ const QuestionPlay = () => {
       }}
     />,
     <SelectCorrectAnswer
-      answer={questions[0].answer_3 || ''}
+      answer={questions[countQuestions].answer_3 || ''}
       numberAnswer={3}
       check={check3}
+      setUserResponse={setUserResponse}
       setCheck={{
         setCheck1,
         setCheck2,
@@ -67,9 +73,10 @@ const QuestionPlay = () => {
       }}
     />,
     <SelectCorrectAnswer
-      answer={questions[0].answer_correct || ''}
+      answer={questions[countQuestions].answer_correct || ''}
       numberAnswer={4}
       check={check4}
+      setUserResponse={setUserResponse}
       setCheck={{
         setCheck1,
         setCheck2,
@@ -86,7 +93,7 @@ const QuestionPlay = () => {
 
         const response = await api.get('correct_anwser', {
           params: {
-            name: 'Tecnologia', // MUDAR ISSO AQUI DEPOIS
+            name: theme,
           },
         });
 
@@ -103,6 +110,34 @@ const QuestionPlay = () => {
 
   const randomComponents = rondomizerComponents(arrayComponents);
 
+  async function checkCorrectQuestion() {
+    try {
+      const response = await api.post('correct_anwser', {
+        id: questions[countQuestions]._id,
+        answer_user: userResponse,
+      });
+
+      if (response.data.mensagem) {
+        questionStore.setQuestionCount();
+      }
+    } catch (err) {
+      console.log(err.response.data.error);
+      Alert.alert('Erro ao enviar pergunta!');
+    }
+  }
+
+  async function nextQuestion() {
+    await checkCorrectQuestion();
+    setCountQuestions(countQuestions + 1);
+  }
+
+  async function goToEndQuiz() {
+    await checkCorrectQuestion();
+    navigation.navigate('EndQuiz', {
+      count: questionStore.questionCorrectCount,
+    });
+  }
+
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#3c234a" />
@@ -113,21 +148,32 @@ const QuestionPlay = () => {
         <>
           <TimeText>60 seg</TimeText>
           <QuestionCurrentNumber>
-            Questão 1<QuestionTotalNumber>/5</QuestionTotalNumber>
+            Questão {countQuestions + 1}
+            <QuestionTotalNumber>/5</QuestionTotalNumber>
           </QuestionCurrentNumber>
-          <AskText>{questions[0].ask || ''}</AskText>
+          <AskText>{questions[countQuestions].ask || ''}</AskText>
 
           {randomComponents.map((component) => {
             return <View key={component}>{component}</View>;
           })}
 
-          <ButtonSubmit onPress={() => {}}>
-            <ButtonSubmitText>Próxima</ButtonSubmitText>
+          <ButtonSubmit
+            onPress={countQuestions === 4 ? goToEndQuiz : nextQuestion}
+          >
+            {countQuestions === 4 ? (
+              <ButtonSubmitText>Finalizar</ButtonSubmitText>
+            ) : (
+              <ButtonSubmitText>Próxima</ButtonSubmitText>
+            )}
           </ButtonSubmit>
+
+          {/* <Text>{questionStore.questionCorrectCount}</Text> */}
         </>
       )}
     </Container>
   );
 };
 
-export default QuestionPlay;
+export const QuestionPlay = inject('questionStore')(
+  observer(QuestionPlayComponent)
+);
