@@ -27,5 +27,6 @@ module.exports = {
     'camelcase': 'off',
     'no-param-reassign': 'off',
     'react/prop-types': 'off',
+    'dot-notation': 'off',
   },
 };

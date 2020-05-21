@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { StatusBar, Alert, View, Text } from 'react-native';
+import { StatusBar, Alert } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { inject, observer } from 'mobx-react';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import api from '../../services/api';
-import { rondomizerComponents } from '../../utils/rondomizerComponents';
+import { randomizerAnswer } from '../../utils/randomizerAnswer';
 
 import Loading from '../../components/Loading';
 import SelectCorrectAnswer from '../../components/SelectCorrectAnswer';
@@ -21,6 +21,8 @@ import {
   ButtonSubmitText,
 } from './styles';
 
+const arrayAnswer = ['answer_1', 'answer_2', 'answer_3', 'answer_correct'];
+
 const QuestionPlayComponent = ({ questionStore }) => {
   const [questions, setQuestions] = useState([
     { ask: '', answer_1: '', answer_2: '', answer_3: '', answer_correct: '' },
@@ -33,6 +35,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
   const [countQuestions, setCountQuestions] = useState(0);
   const [userResponse, setUserResponse] = useState('');
   const [secondsEllapsed, setSecondsEllapsed] = useState(0);
+  // const [answerOptions, setAnswerOptions] = useState(arrayAnswer);
 
   const progress = useMemo(() => (secondsEllapsed * 100) / 60, [
     secondsEllapsed,
@@ -41,59 +44,6 @@ const QuestionPlayComponent = ({ questionStore }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const { theme } = route.params;
-
-  // const arrayComponents = [
-  //   <SelectCorrectAnswer
-  //     answer={questions[countQuestions].answer_1 || ''}
-  //     numberAnswer={1}
-  //     check={check1}
-  //     setUserResponse={setUserResponse}
-  //     setCheck={{
-  //       setCheck1,
-  //       setCheck2,
-  //       setCheck3,
-  //       setCheck4,
-  //     }}
-  //   />,
-  //   <SelectCorrectAnswer
-  //     answer={questions[countQuestions].answer_2 || ''}
-  //     numberAnswer={2}
-  //     check={check2}
-  //     setUserResponse={setUserResponse}
-  //     setCheck={{
-  //       setCheck1,
-  //       setCheck2,
-  //       setCheck3,
-  //       setCheck4,
-  //     }}
-  //   />,
-  //   <SelectCorrectAnswer
-  //     answer={questions[countQuestions].answer_3 || ''}
-  //     numberAnswer={3}
-  //     check={check3}
-  //     setUserResponse={setUserResponse}
-  //     setCheck={{
-  //       setCheck1,
-  //       setCheck2,
-  //       setCheck3,
-  //       setCheck4,
-  //     }}
-  //   />,
-  //   <SelectCorrectAnswer
-  //     answer={questions[countQuestions].answer_correct || ''}
-  //     numberAnswer={4}
-  //     check={check4}
-  //     setUserResponse={setUserResponse}
-  //     setCheck={{
-  //       setCheck1,
-  //       setCheck2,
-  //       setCheck3,
-  //       setCheck4,
-  //     }}
-  //   />,
-  // ];
-
-  // const randomComponents = useMemo(() => rondomizerComponents(arrayComponents));
 
   useEffect(() => {
     async function loadQuestions() {
@@ -127,8 +77,6 @@ const QuestionPlayComponent = ({ questionStore }) => {
     };
   }, [secondsEllapsed]);
 
-  // const randomComponents = rondomizerComponents(arrayComponents);
-
   async function checkCorrectQuestion() {
     try {
       const response = await api.post('correct_anwser', {
@@ -160,6 +108,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
     } else {
       await checkCorrectQuestion();
       setSecondsEllapsed(0);
+      randomizerAnswer(arrayAnswer);
       setCountQuestions(countQuestions + 1);
     }
   }
@@ -224,7 +173,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
           <AskText>{questions[countQuestions].ask || ''}</AskText>
 
           <SelectCorrectAnswer
-            answer={questions[countQuestions].answer_1 || ''}
+            answer={questions[countQuestions][arrayAnswer[0]] || ''}
             numberAnswer={1}
             check={check1}
             setUserResponse={setUserResponse}
@@ -236,7 +185,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
             }}
           />
           <SelectCorrectAnswer
-            answer={questions[countQuestions].answer_2 || ''}
+            answer={questions[countQuestions][arrayAnswer[1]] || ''}
             numberAnswer={2}
             check={check2}
             setUserResponse={setUserResponse}
@@ -248,7 +197,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
             }}
           />
           <SelectCorrectAnswer
-            answer={questions[countQuestions].answer_3 || ''}
+            answer={questions[countQuestions][arrayAnswer[2]] || ''}
             numberAnswer={3}
             check={check3}
             setUserResponse={setUserResponse}
@@ -260,7 +209,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
             }}
           />
           <SelectCorrectAnswer
-            answer={questions[countQuestions].answer_correct || ''}
+            answer={questions[countQuestions][arrayAnswer[3]] || ''}
             numberAnswer={4}
             check={check4}
             setUserResponse={setUserResponse}
@@ -271,10 +220,6 @@ const QuestionPlayComponent = ({ questionStore }) => {
               setCheck4,
             }}
           />
-
-          {/* {randomComponents.map((component) => {
-            return <View key={component}>{component}</View>;
-          })} */}
 
           <ButtonSubmit
             onPress={countQuestions === 4 ? goToEndQuiz : nextQuestion}

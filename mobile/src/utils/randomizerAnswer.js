@@ -1,4 +1,4 @@
-export function rondomizerComponents(array) {
+export function randomizerAnswer(array) {
   let currentIndex = array.length;
   let temporaryValue;
   let randomIndex;
