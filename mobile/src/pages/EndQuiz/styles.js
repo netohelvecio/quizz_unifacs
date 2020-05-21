@@ -30,13 +30,13 @@ export const TextCongratulationsSubTitle = styled.Text`
 `;
 
 export const TextScore = styled.Text`
-  font-size: 84px;
+  font-size: 70px;
   color: #10472f;
   font-weight: bold;
 `;
 
 export const TextAnswerTotal = styled.Text`
-  font-size: 64px;
+  font-size: 50px;
   color: #10472f;
   font-weight: bold;
 `;

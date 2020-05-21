@@ -23,7 +23,7 @@ const TutorialQuiz = () => {
 
   const { count, theme } = route.params;
 
-  const text = `Acertei ${count} questões do tema ${theme} no app QuizIdea!!!`;
+  const text = `Galera fiz um total de **${count}/800** na categoria ${theme} no app **QuizIdeia** !!!`;
 
   function goToHome() {
     navigation.navigate('Home');
@@ -40,11 +40,13 @@ const TutorialQuiz = () => {
 
       <ContainerScore>
         <TextCongratulations>Parabéns</TextCongratulations>
-        <TextCongratulationsSubTitle>Você acertou:</TextCongratulationsSubTitle>
+        <TextCongratulationsSubTitle>
+          Total de pontos:
+        </TextCongratulationsSubTitle>
 
         <TextScore>
           {count}
-          <TextAnswerTotal>/5</TextAnswerTotal>
+          <TextAnswerTotal>/800</TextAnswerTotal>
         </TextScore>
       </ContainerScore>
 

@@ -42,7 +42,9 @@ const TutorialQuizComponent = ({ questionStore }) => {
       <TextTutorialTitle>Tutorial</TextTutorialTitle>
       <TextTutorial>
         Serão 5 questões sobre o tema escolhido, você tem 1 minuto para
-        responder cada uma delas, deslize para começar a jogar. Boa Sorte!
+        responder cada uma delas, cada pergunta certa vai gerar 100 pontos e
+        quanto mais rápido responder será adicionado pontos extras, o máximo de
+        pontos possiveis é de 800 pontos. Boa Sorte!
       </TextTutorial>
 
       <RNSlidingButton

@@ -17,7 +17,7 @@ export const ButtonSliderContainer = styled.View`
 export const TextTutorialTitle = styled.Text`
   color: #fff;
   font-size: 22px;
-  margin-top: 35%;
+  margin-top: 30%;
   font-weight: bold;
   margin-bottom: 15px;
 `;
@@ -26,7 +26,7 @@ export const TextTutorial = styled.Text`
   color: #fff;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 50%;
+  margin-bottom: 30%;
 `;
 
 export const SliderButtonText = styled.Text`

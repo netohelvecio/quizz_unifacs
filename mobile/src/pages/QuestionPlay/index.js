@@ -34,7 +34,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
   const [userResponse, setUserResponse] = useState('');
   const [secondsEllapsed, setSecondsEllapsed] = useState(0);
 
-  const progress = useMemo(() => (secondsEllapsed * 100) / 5, [
+  const progress = useMemo(() => (secondsEllapsed * 100) / 60, [
     secondsEllapsed,
   ]);
 
@@ -143,7 +143,10 @@ const QuestionPlayComponent = ({ questionStore }) => {
       setCheck4(false);
 
       if (response.data.mensagem) {
-        questionStore.setQuestionCount();
+        const correctAnswerPoints = 100;
+        const timeLeftPoints = 60 - secondsEllapsed;
+
+        questionStore.setQuestionCount(correctAnswerPoints + timeLeftPoints);
       }
     } catch (err) {
       console.log(err.response.data.error);
@@ -174,7 +177,7 @@ const QuestionPlayComponent = ({ questionStore }) => {
   }
 
   const onAnimationComplete = useCallback(() => {
-    if (secondsEllapsed === 5) {
+    if (secondsEllapsed === 60) {
       if (countQuestions === 4) {
         navigation.navigate('EndQuiz', {
           count: questionStore.questionCorrectCount,

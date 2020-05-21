@@ -5,7 +5,7 @@ export class QuestionStore {
   questionCorrectCount = 0;
 
   @action
-  setQuestionCount() {
-    this.questionCorrectCount += 1;
+  setQuestionCount(points) {
+    this.questionCorrectCount += points;
   }
 }
