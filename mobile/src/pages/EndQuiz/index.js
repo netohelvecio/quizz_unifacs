@@ -23,7 +23,7 @@ const TutorialQuiz = () => {
 
   const { count, theme } = route.params;
 
-  const text = `Galera fiz um total de **${count}/800** na categoria ${theme} no app **QuizIdeia** !!!`;
+  const text = `Galera fiz um total de *${count}/800* na categoria ${theme} no app *QuizIdeia* !!!`;
 
   function goToHome() {
     navigation.navigate('Home');
