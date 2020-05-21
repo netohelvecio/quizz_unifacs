@@ -6,11 +6,18 @@ export const Container = styled.View`
   padding: 20px 40px;
 `;
 
-export const TimeText = styled.Text`
-  font-size: 20px;
-  color: #ebb9fe;
-  margin-bottom: 15px;
+export const ContainerQuestion = styled.View`
+  /* flex: 1; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+export const TimeText = styled.Text`
+  font-size: 18px;
+  color: #ebb9fe;
+`;
+
 export const QuestionCurrentNumber = styled.Text`
   font-size: 28px;
   font-weight: bold;
