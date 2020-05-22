@@ -6,7 +6,7 @@
 &nbsp;
 
 <div align="center">
- <img src="https://user-images.githubusercontent.com/52840407/82619858-6f77ef80-9bad-11ea-9fe3-3652cfd6040e.gif" width="200">
+ <img src="https://user-images.githubusercontent.com/52840407/82619858-6f77ef80-9bad-11ea-9fe3-3652cfd6040e.gif" width="230">
 </div>
 
 ## :bookmark: Sobre 
